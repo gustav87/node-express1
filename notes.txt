@@ -1,0 +1,9 @@
+docker build -t express1 .
+docker run -it -p 3000:3000 -d --mount source=expressVolume1,target=/app/dist/public/logs --name expressc express1
+docker run -it -p 3000:3000 -d --name expressc express1
+
+docker run -it --rm -p 3000:3000 express1 /bin/sh
+
+TODO:
+install a bundler like webpack, because right now, I have index.html and styles.css in the dist folder, because they are served from there. something needs to bundle your stuff and put it in dist. or maybe install some sort of frontend?
+

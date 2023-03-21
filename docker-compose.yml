@@ -1,0 +1,20 @@
+services:
+  app:
+    image: express1
+    container_name: expressc
+    restart: always
+    ports:
+      - "3000:3000"
+    logging:
+      options:
+        max-size: 50m
+    expose:
+      - 3000
+    volumes:
+      - w3c-matchmaking-prod:/app/dist/public/logs
+    environment:
+      - NODE_OPTIONS=--max-old-space-size=8000
+
+volumes:
+  w3c-matchmaking-prod:
+
