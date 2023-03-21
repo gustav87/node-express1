@@ -3,11 +3,23 @@ import dotenv from 'dotenv';
 import { logger } from './logger';
 import serveIndex from 'serve-index';
 import http from 'http';
+import { socketService } from './SocketService'
+import { fetchService } from './FetchService'
+import { rabbitService } from './RabbitService'
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
 const server = http.createServer(app);
+
+// Start socket.io
+socketService(server);
+
+// Load SHMI times
+//fetchService.getSmhiTimes().then(res => console.log(res));
+
+// Start RabbitMQ
+rabbitService.connect();
 
 // Load index.html
 app.get('/', (req: Request, res: Response) => {
