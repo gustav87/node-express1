@@ -41,5 +41,3 @@ server.listen(port, () => {
 
 setInterval(() => logger.info("cheese"), 100000);
 
-
-
