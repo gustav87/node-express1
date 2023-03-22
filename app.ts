@@ -5,7 +5,8 @@ import serveIndex from 'serve-index';
 import http from 'http';
 import { socketService } from './SocketService'
 import { fetchService } from './FetchService'
-import { rabbitService } from './RabbitService'
+import { rabbitSendService } from './RabbitSendService'
+import { rabbitReceiveService } from './RabbitReceiveService'
 
 dotenv.config();
 const app = express();
@@ -18,8 +19,12 @@ socketService(server);
 // Load SHMI times
 //fetchService.getSmhiTimes().then(res => console.log(res));
 
-// Start RabbitMQ
-rabbitService.connect();
+// Start RabbitMQ publisher
+rabbitSendService.send("hello there", "hello");
+//setInterval(() => rabbitSendService.send("yo", "hello"), 5000);
+
+// Start RabbitMQ consumer
+rabbitReceiveService.receive("hello");
 
 // Load index.html
 app.get('/', (req: Request, res: Response) => {
